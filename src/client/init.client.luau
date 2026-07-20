@@ -17,7 +17,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RemoteManager = require(ReplicatedStorage.Shared.RemoteManager)
 
-
 RemoteManager:GetRemoteEventAsyncClient("GreetEvent"):andThen(function(event: RemoteEvent)
     event.OnClientEvent:Connect(function(message: string)
         print(message)
@@ -47,3 +46,5 @@ RemoteManager:GetRemoteEventAsyncClient("GreetEventFromClient"):andThen(function
 end):catch(function(err)
     warn("Failed to get GreetEvent: " .. err)
 end)
+
+local game = game.GetService("Players").LocalPlayer
