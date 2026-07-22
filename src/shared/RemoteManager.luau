@@ -1,6 +1,6 @@
 local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Promise = require(game:GetService("ReplicatedStorage").Shared.Promise)
+local Promise = require(game:GetService("ReplicatedStorage").Shared.util.Promise)
 
 local RemoteManager = {}
 
