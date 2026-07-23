@@ -1,8 +1,7 @@
-local GameSettings = {
-	
+local RoundStates = {
 	-- Game Settings
-	Waiting = {
-		name = "Waiting",
+	Intermission = {
+		name = "Intermission",
 		length = 10
 	},
 	Starting = {
@@ -22,4 +21,4 @@ local GameSettings = {
 }
 
 
-return GameSettings
+return RoundStates

@@ -6,7 +6,7 @@ local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
 -- Get the StateUpdate RemoteEvent
-local RemoteManager = require(ReplicatedStorage.Shared.RemoteManager)
+local EventNetworkingManager = require(ReplicatedStorage.Shared.EventNetworkingManager)
 
 -- Create UI
 local screenGui = Instance.new("ScreenGui")
@@ -34,7 +34,6 @@ textLabel.Parent = screenGui
 
 -- State tracking
 local currentStateName = "Unknown"
-local currentStateId = ""
 local stateStartTime = 0
 local isTracking = false
 
@@ -48,11 +47,9 @@ local function updateDisplay()
 end
 
 -- Listen for state updates from server
-RemoteManager:GetRemoteEventAsyncClient("StateUpdate"):andThen(function(event: RemoteEvent)
-    event.OnClientEvent:Connect(function(stateName: string, stateId: string)
-        print("State update received:", stateName, stateId)
+EventNetworkingManager:GetRemoteEventAsyncClient("StateUpdateRemote"):andThen(function(event: RemoteEvent)
+    event.OnClientEvent:Connect(function(stateName: string)
         currentStateName = stateName or "Unknown"
-        currentStateId = stateId or ""
         stateStartTime = tick()
         isTracking = true
         updateDisplay()
